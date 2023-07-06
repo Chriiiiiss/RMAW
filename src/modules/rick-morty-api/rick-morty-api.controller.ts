@@ -9,9 +9,4 @@ export class RickMortyApiController {
   getAllCharacters(): string {
     return this.remService.getAllCharacters();
   }
-
-  @Get()
-  imAlive(): string {
-    return 'I am alive!';
-  }
 }
