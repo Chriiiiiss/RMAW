@@ -9,10 +9,7 @@ export class RickMortyApiService {
   async findAllCharacters(): Promise<string> {
     const url = new URL(API_ENDPOINTS.CHARACTERS, env.RICK_MORTY_API_URL);
 
-    const data = this.dataService.formatData(url.href);
-
-    console.log(`url: ${url.href}`);
-    console.log(data);
+    const data = this.dataService.fetchAllChars(url.href);
 
     return data;
   }
