@@ -2,46 +2,45 @@ import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
 import { lastValueFrom } from 'rxjs';
 import { TCharacter, TCharacters } from './types/characters.types';
-import { Axios, AxiosResponse } from 'axios';
+import { AxiosResponse } from 'axios';
+import { IApiResponses } from './interfaces/api.interfaces';
 
 @Injectable()
 export class DataService {
   constructor(private readonly httpService: HttpService) {}
 
-  private formatData(data: any): TCharacters {
-    const items = data.map((item: TCharacter) => {
-      return {
-        name: item.name,
-        status: item.status,
-        species: item.species,
-        gender: item.gender,
-        image: item.image,
-      };
-    });
-
-    return items;
+  private formatData(data: Array<object>): TCharacters {
+    return data.map((item: TCharacter) => ({
+      id: item.id,
+      name: item.name,
+      status: item.status,
+      species: item.species,
+      gender: item.gender,
+      image: item.image,
+    }));
   }
 
-  async fetchAllChars(url: string): Promise<any> {
-    let data = [];
-    data = await this.fetchPage(url, data);
+  async fetchAllChars(url: string): Promise<string> {
+    const data = await this.fetchPage(url, []);
     return JSON.stringify(data);
   }
 
-  private async fetchPage(url: string, data: any): Promise<any> {
+  private async fetchPage(
+    url: string,
+    data: TCharacters | Array<null>,
+  ): Promise<TCharacters> {
     const response = await this.fetchUrl(url);
     data = [...data, ...this.formatData(response.results)];
 
-    this.formatData(response.results);
     if (response.info.next) {
       return await this.fetchPage(response.info.next, data);
     }
     return data;
   }
 
-  async fetchUrl(url: string): Promise<any> {
+  async fetchUrl(url: string): Promise<IApiResponses> {
     try {
-      const response: AxiosResponse<string> = await lastValueFrom(
+      const response: AxiosResponse<IApiResponses> = await lastValueFrom(
         this.httpService.get(url),
       );
       return response.data;
