@@ -9,7 +9,7 @@ import { IApiResponses } from './interfaces/api.interfaces';
 export class DataService {
   constructor(private readonly httpService: HttpService) {}
 
-  private formatData(data: Array<object>): TCharacters {
+  public formatData(data: Array<object>): TCharacters {
     return data.map((item: TCharacter) => ({
       id: item.id,
       name: item.name,
