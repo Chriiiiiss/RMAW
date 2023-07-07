@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { RickMortyApiModule } from './rick-morty-api/rick-morty-api.module';
+import { RickMortyApiModule } from './modules/rick-morty-api/rick-morty-api.module';
 
 @Module({
   imports: [RickMortyApiModule],
