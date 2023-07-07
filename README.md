@@ -1,73 +1,89 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
+# Rick and Morty API Wrapper
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Introduction
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+Welcome to the Rick and Morty API Wrapper project! This is a robust and easy-to-use interface to access information about the wonderful universe of Rick and Morty. By using our API Wrapper, you can fetch data regarding various characters, episodes, and other intricacies of the show.
 
-## Description
+## Getting Started
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Before you start with the setup, please make sure Docker and Docker Compose are properly installed on your machine.
 
-## Installation
+### Configuration
 
-```bash
-$ npm install
+This project requires a configuration file to start. A sample file named `.env.sample` is included in the project. Copy this file and name the copy `.env.local`.
+
+```shell
+cp .env.sample .env.local
 ```
 
-## Running the app
+In the `.env.local` file, update the `RICK_AND_MORTY_API_URL` variable with the URL of the Rick and Morty API.
 
-```bash
-# development
-$ npm run start
+**Note**: Even though the Rick and Morty API does not require an API key, it's crucial to not expose any sensitive data such as API keys or secrets in your code or version control system. Always keep them in environment variables or some sort of secure configuration that is not tracked by version control.
 
-# watch mode
-$ npm run start:dev
+### Starting the application
 
-# production mode
-$ npm run start:prod
+Once your `.env.local` file is set up, you can start the application by running the following command:
+
+```shell
+docker-compose up
 ```
 
-## Test
+This command will build the Docker image and start the container. Once the container is running, the API Wrapper will be accessible on the defined port in the Docker Compose file.
 
-```bash
-# unit tests
-$ npm run test
+## Usage
 
-# e2e tests
-$ npm run test:e2e
+You can now send HTTP requests to the application to retrieve data from the Rick and Morty API.
 
-# test coverage
-$ npm run test:cov
+## API Documentation
+
+This section outlines the details of the API endpoints.
+
+### Characters
+
+**Endpoint:** `/rem/characters`
+
+**Method:** `GET`
+
+**Description:** This endpoint fetches a list of all characters from the Rick and Morty series. The data is returned as an array of objects, with each object containing details about a single character.
+
+**Response Format:**
+
+Each object in the response array includes the following properties:
+
+- `id`: A unique identifier for the character.
+- `name`: The name of the character.
+- `status`: The current status of the character, which can be "Alive", "Dead", or "unknown".
+- `species`: The species of the character, such as "Human" or "Alien".
+- `gender`: The gender of the character, which can be "Male", "Female", or "Genderless".
+- `image`: A URL to an image of the character.
+
+**Example Response:**
+
+```json
+[
+    {
+        "id": 1,
+        "name": "Rick Sanchez",
+        "status": "Alive",
+        "species": "Human",
+        "gender": "Male",
+        "image": "https://rickandmortyapi.com/api/character/avatar/1.jpeg"
+    },
+    {
+        ...
+    },
+    ...
+]
 ```
 
-## Support
+Stay tuned for more endpoints coming soon!
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+## Contributing
 
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+We appreciate your interest in contributing to the Rick and Morty API Wrapper project. Please feel free to submit issues, pull requests, and contribute in any way you can.
 
 ## License
 
-Nest is [MIT licensed](LICENSE).
+This project is licensed under the MIT license. See the LICENSE file for details.
+
+Happy Coding!
