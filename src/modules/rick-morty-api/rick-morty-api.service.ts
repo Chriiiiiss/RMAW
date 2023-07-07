@@ -6,11 +6,12 @@ import { DataService } from './data.service';
 @Injectable()
 export class RickMortyApiService {
   constructor(private readonly dataService: DataService) {}
+
   async findAllCharacters(): Promise<string> {
     const url = new URL(API_ENDPOINTS.CHARACTERS, env.RICK_MORTY_API_URL);
 
-    const data = this.dataService.fetchAllChars(url.href);
+    const charactersData = this.dataService.fetchAllChars(url.href);
 
-    return data;
+    return charactersData;
   }
 }

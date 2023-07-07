@@ -9,7 +9,7 @@ import { IApiResponses } from './interfaces/api.interfaces';
 export class DataService {
   constructor(private readonly httpService: HttpService) {}
 
-  public formatData(data: Array<object>): TCharacters {
+  public formatCharactersData(data: Array<object>): TCharacters {
     return data.map((item: TCharacter) => ({
       id: item.id,
       name: item.name,
@@ -21,8 +21,8 @@ export class DataService {
   }
 
   async fetchAllChars(url: string): Promise<string> {
-    const data = await this.fetchPage(url, []);
-    return JSON.stringify(data);
+    const charatersData = await this.fetchPage(url, []);
+    return JSON.stringify(charatersData);
   }
 
   private async fetchPage(
@@ -30,7 +30,7 @@ export class DataService {
     data: TCharacters | Array<null>,
   ): Promise<TCharacters> {
     const response = await this.fetchUrl(url);
-    data = [...data, ...this.formatData(response.results)];
+    data = [...data, ...this.formatCharactersData(response.results)];
 
     if (response.info.next) {
       return await this.fetchPage(response.info.next, data);

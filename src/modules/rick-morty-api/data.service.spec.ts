@@ -46,7 +46,7 @@ describe('DataService', () => {
       };
       jest.spyOn(dataService, 'fetchUrl').mockResolvedValue(mockResult);
       expect(await dataService.fetchAllChars('https://test.com')).toBe(
-        JSON.stringify(dataService.formatData(mockResult.results)),
+        JSON.stringify(dataService.formatCharactersData(mockResult.results)),
       );
     });
   });
