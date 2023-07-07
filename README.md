@@ -18,7 +18,7 @@ cp .env.sample .env.local
 
 In the `.env.local` file, update the `RICK_AND_MORTY_API_URL` variable with the URL of the Rick and Morty API.
 
-**Note**: Even though the Rick and Morty API does not require an API key, it's crucial to not expose any sensitive data such as API keys or secrets in your code or version control system. Always keep them in environment variables or some sort of secure configuration that is not tracked by version control.
+**Note**: Even though the Rick and Morty API does not require an API key, it's crucial to not expose any sensitive data such as API keys or secrets. It is not a secret, but I wanted to hide something
 
 ### Starting the application
 
